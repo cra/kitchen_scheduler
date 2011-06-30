@@ -7,4 +7,4 @@ add_definitions(-Wall -Wextra -pedantic -std=c++0x)
 
 set(DOC_FILES README docs/PLAN)
 
-add_executable(kitchen_scheduler main.cpp DutyPerson.cpp InputParser.cpp)
+add_executable(kitchen_scheduler main.cpp InputParser.cpp DutyManager.cpp)

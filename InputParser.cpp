@@ -1,6 +1,7 @@
 #include "InputParser.hpp"
 
 
+// Прочитать входной файл. Заполняется массив пользователей и график дежурств.
 InputParser::InputParser(const std::string& filename):
     filename(filename) 
 {
@@ -11,7 +12,6 @@ InputParser::InputParser(const std::string& filename):
     while(std::getline(input, s)) {
         boost::tokenizer<> toker(s);
         boost::tokenizer<>::iterator t = toker.begin();
-        boost::shared_ptr<DutyPerson> p(new DutyPerson(*t, *(++t)));
-        people.push_back(p);
+        DutyManager::addDutyPerson(*t, *(t++));
     }
 }
