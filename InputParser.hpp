@@ -17,8 +17,7 @@ class InputParser {
         InputParser(const InputParser& forbidden);
 
     public:
-        InputParser(const std::string& filename):
-            filename(filename) {};
+        InputParser(const std::string& filename);
         ~InputParser() {};
 
 };

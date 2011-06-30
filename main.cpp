@@ -9,7 +9,7 @@ int main(int argc, char **argv)
 
     // open input file based on argv.
     try {
-        InputParser input(argv[1]);
+        InputParser input(argv[0]);
     } catch(std::exception &e) {
         std::cout << e.what() << std::endl;
         InputParser input("/some/default/input");
