@@ -1,8 +1,12 @@
 #pragma once
 #include <vector>
+#include <ctime>
+#include <cstdlib>
 #include <string>
 #include <iostream>
+#include <algorithm>
 #include <boost/noncopyable.hpp>
+#include <boost/circular_buffer.hpp>
 #include <boost/format.hpp>
 
 
@@ -23,10 +27,14 @@ class DutyManager : private boost::noncopyable {
 
     private:
         std::vector<boost::shared_ptr<DutyPerson> > people;
+        const std::vector<boost::shared_ptr<DutyPerson> >::const_iterator current;
         DutyManager() {};
         static DutyManager* instance;
         static DutyManager* getInstance();
+        void shuffle();
+        boost::shared_ptr<DutyPerson> getThatGuy(int num);
         void addDutyPerson(boost::shared_ptr<DutyPerson> person);
     public:
         static void addDutyPerson(const std::string &Name, const std::string &Surname);
+        static void test_schedule(int pack);
 };
