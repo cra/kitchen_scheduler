@@ -15,6 +15,7 @@ InputParser::InputParser(const std::string& filename):
         for(boost::tokenizer<>::iterator beg = toker.begin(); beg != toker.end(); ++beg) 
         {
             std::cout << *beg << '\n' ;
+        }
     }
     std::cout << filename << std::endl;
 }
