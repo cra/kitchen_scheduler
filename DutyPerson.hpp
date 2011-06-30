@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include <boost/format.hpp>
 
 class DutyPerson {
@@ -7,7 +8,7 @@ class DutyPerson {
         const std::string Surname;
 
     public:
-        DutyPerson(const std::string& name, const std::string& surname): Name(name), Surname(surname) {};
+        DutyPerson(const std::string& name, const std::string& surname);
         ~DutyPerson() {};
-        std::string getFullName() {return boost::str(boost::format("%2% %1%") % Name.c_str() % Surname.c_str());}
+        const std::string getFullName() {return boost::str(boost::format("%2% %1%") % Name.c_str() % Surname.c_str());}
 };

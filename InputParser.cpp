@@ -1,21 +1,17 @@
 #include "InputParser.hpp"
 
-#include <iostream>
-#include <boost/tokenizer.hpp>
-#include <string>
-#include <fstream>
 
 InputParser::InputParser(const std::string& filename):
     filename(filename) 
 {
+    std::cout << boost::format("[InputParser] Input file: %s\n") % filename;
+
     std::ifstream input(filename.c_str());
     std::string s;
     while(std::getline(input, s)) {
         boost::tokenizer<> toker(s);
-        for(boost::tokenizer<>::iterator beg = toker.begin(); beg != toker.end(); ++beg) 
-        {
-            std::cout << *beg << '\n' ;
-        }
+        boost::tokenizer<>::iterator t = toker.begin();
+        boost::shared_ptr<DutyPerson> p(new DutyPerson(*t, *(++t)));
+        people.push_back(p);
     }
-    std::cout << filename << std::endl;
 }

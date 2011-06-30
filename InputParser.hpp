@@ -2,6 +2,11 @@
 
 #include <string>
 #include <vector>
+#include <boost/tokenizer.hpp>
+#include <boost/format.hpp>
+#include <boost/shared_ptr.hpp>
+#include <fstream>
+#include <iostream>
 
 #include "DutyPerson.hpp"
 
@@ -12,7 +17,7 @@ class InputParser {
     // Без имени файла бессмысленен, поэтому пустой конструктор запрещён.
     private:
         const std::string filename;
-        std::vector<DutyPerson> people;
+        std::vector<boost::shared_ptr<DutyPerson> > people;
         InputParser();
         InputParser(const InputParser& forbidden);
 
