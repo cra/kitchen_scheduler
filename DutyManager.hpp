@@ -18,11 +18,13 @@ class DutyManager : private boost::noncopyable {
         private:
             const std::string Name;
             const std::string Surname;
+            const bool male;
 
         public:
-            DutyPerson(const std::string& name, const std::string& surname);
+            DutyPerson(const std::string& name, const std::string& surname, const bool is_male);
             ~DutyPerson() {};
             const std::string getFullName() {return boost::str(boost::format("%1% %2%") % Name.c_str() % Surname.c_str());}
+            bool is_male() {return male;}
     };
 
     private:
@@ -35,6 +37,6 @@ class DutyManager : private boost::noncopyable {
         boost::shared_ptr<DutyPerson> getThatGuy(int num);
         void addDutyPerson(boost::shared_ptr<DutyPerson> person);
     public:
-        static void addDutyPerson(const std::string &Name, const std::string &Surname);
+        static void addDutyPerson(const std::string &Name, const std::string &Surname, const bool is_male);
         static void test_schedule(int pack);
 };

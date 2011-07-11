@@ -5,6 +5,7 @@
 #include <iostream>
 #include <boost/tokenizer.hpp>
 #include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/noncopyable.hpp>
 

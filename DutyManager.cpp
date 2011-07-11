@@ -3,8 +3,8 @@
 DutyManager* DutyManager::instance = NULL;
 
 // Тупо конструктор-флудилка.
-DutyManager::DutyPerson::DutyPerson(const std::string& name, const std::string& surname):
-    Name(name), Surname(surname) 
+DutyManager::DutyPerson::DutyPerson(const std::string& name, const std::string& surname, const bool is_male):
+    Name(name), Surname(surname), male(is_male)
 {
     std::cout << boost::format("[DutyPerson] Дежурный %s добавлен.\n") % getFullName();
 }
@@ -25,9 +25,9 @@ void DutyManager::addDutyPerson(boost::shared_ptr<DutyPerson> p)
 }
 
 // статический метод, добавляющий по имени-фамилии дежурного в общий список.
-void DutyManager::addDutyPerson(const std::string& Name, const std::string& Surname)
+void DutyManager::addDutyPerson(const std::string& Name, const std::string& Surname, const bool is_male)
 {
-    boost::shared_ptr<DutyPerson> p(new DutyPerson(Name, Surname));
+    boost::shared_ptr<DutyPerson> p(new DutyPerson(Name, Surname, is_male));
     DutyManager::getInstance()->addDutyPerson(p);
 }
 
@@ -49,7 +49,7 @@ void DutyManager::test_schedule(int pack)
     DutyManager::getInstance()->shuffle();
 
     auto g = 0;
-    for(auto i = 0; i < 10; ++i)
+    for(auto i = 0; i < 5*pack; ++i)
     {
         std::cout << DutyManager::getInstance()->getThatGuy(i)->getFullName();
         if(!(++g % pack))

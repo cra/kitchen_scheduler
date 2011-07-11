@@ -12,6 +12,11 @@ InputParser::InputParser(const std::string& filename):
     while(std::getline(input, s)) {
         boost::tokenizer<> toker(s);
         boost::tokenizer<>::iterator t = toker.begin();
-        DutyManager::addDutyPerson(*t, *(t++));
+
+        std::string name = *t; t++;
+        std::string surname = *t; t++;
+        bool male = (((std::string)(*t)).c_str()[0] == 'm'); // ancient indian black magic
+
+        DutyManager::addDutyPerson(name, surname, male);
     }
 }
