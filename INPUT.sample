@@ -1,3 +1,6 @@
-Маша Кузнецова female
-Павел Иванов male
-Анатолий Петров male
+person Маша Кузнецова female
+#person Павел Иванов male
+person Андрей Вагхрабрграбр male
+person Анатолий Петров male
+event Утро 8 2
+event Обед 6 4

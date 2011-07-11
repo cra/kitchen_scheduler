@@ -2,11 +2,19 @@
 
 DutyManager* DutyManager::instance = NULL;
 
+
 // Тупо конструктор-флудилка.
 DutyManager::DutyPerson::DutyPerson(const std::string& name, const std::string& surname, const bool is_male):
     Name(name), Surname(surname), male(is_male)
 {
-    std::cout << boost::format("[DutyPerson] Дежурный %s добавлен.\n") % getFullName();
+    std::cout << boost::format("[DutyPerson] Дежурный %s добавл%s.\n") % getFullName() % (male ? "ен" : "ена");
+}
+
+// Ещё один тупо конструктор-флудилка.
+DutyManager::DutyEvent::DutyEvent(const std::string& name, const int female_wanted, const int male_wanted):
+    Name(name), female_wanted(female_wanted), male_wanted(male_wanted)
+{
+    std::cout << boost::format("[DutyEvent] Событие '%s' добавлено. Требуется %s М и %s Ж.\n") % Name % male_wanted % female_wanted;
 }
 
 // синглтонные замарочки. Этот метод я хочу оставить приватным, чтобы наружу
@@ -24,11 +32,24 @@ void DutyManager::addDutyPerson(boost::shared_ptr<DutyPerson> p)
     people.push_back(p);
 }
 
+// внутренний метод для добавления события.
+void DutyManager::addDutyEvent(boost::shared_ptr<DutyEvent> e)
+{
+    events.push_back(e);
+}
+
 // статический метод, добавляющий по имени-фамилии дежурного в общий список.
-void DutyManager::addDutyPerson(const std::string& Name, const std::string& Surname, const bool is_male)
+void DutyManager::addDutyPerson(const std::string& Name, const std::string& Surname, const bool &is_male)
 {
     boost::shared_ptr<DutyPerson> p(new DutyPerson(Name, Surname, is_male));
     DutyManager::getInstance()->addDutyPerson(p);
+}
+
+// статический метод, добавляющий информацию о каком-то событии в общий список 
+void DutyManager::addDutyEvent(const std::string& Name, const int &female_request, const int &male_request)
+{
+    boost::shared_ptr<DutyEvent> e(new DutyEvent(Name, female_request, male_request));
+    DutyManager::getInstance()->addDutyEvent(e);
 }
 
 // перемешать список

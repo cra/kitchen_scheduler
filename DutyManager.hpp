@@ -27,8 +27,21 @@ class DutyManager : private boost::noncopyable {
             bool is_male() {return male;}
     };
 
+    // событие, на котором нужны дежурные
+    class DutyEvent {
+        private:
+            const std::string Name;
+            const unsigned int female_wanted;
+            const unsigned int male_wanted;
+
+        public:
+            DutyEvent(const std::string& name, const int female_wanted, const int male_wanted);
+            ~DutyEvent() {};
+    };
+
     private:
         std::vector<boost::shared_ptr<DutyPerson> > people;
+        std::vector<boost::shared_ptr<DutyEvent> > events;
         const std::vector<boost::shared_ptr<DutyPerson> >::const_iterator current;
         DutyManager() {};
         static DutyManager* instance;
@@ -36,7 +49,9 @@ class DutyManager : private boost::noncopyable {
         void shuffle();
         boost::shared_ptr<DutyPerson> getThatGuy(int num);
         void addDutyPerson(boost::shared_ptr<DutyPerson> person);
+        void addDutyEvent(boost::shared_ptr<DutyEvent> event);
     public:
-        static void addDutyPerson(const std::string &Name, const std::string &Surname, const bool is_male);
+        static void addDutyPerson(const std::string &Name, const std::string &Surname, const bool &is_male);
+        static void addDutyEvent(const std::string &Name, const int &female_request, const int &male_request);
         static void test_schedule(int pack);
 };
